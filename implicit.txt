@@ -1,0 +1,68 @@
+Python 3.5.0 (v3.5.0:374f501f4567, Sep 13 2015, 02:16:59) [MSC v.1900 32 bit (Intel)] on win32
+Type "copyright", "credits" or "license()" for more information.
+>>> from sympy import *
+>>> def pprints(func, *funcs):
+    pprint(func),
+    if funcs is None: return
+    for f in funcs:
+        pprint(f),
+ 
+init_printing()
+
+SyntaxError: invalid syntax
+>>> def pprints(func, *funcs):
+    pprint(func),
+    if funcs is None: return
+    for f in funcs:
+        pprint(f),
+
+        
+>>> init_printing()
+>>> x = symbols('x')
+y = Function('y')(x)
+z = symbols('z')
+
+SyntaxError: multiple statements found while compiling a single statement
+>>> x = symbols('x')
+>>> y = Function('y')(x)
+>>> z = symbols('z')
+>>> eq = x**2 + y**2 - 25
+>>> d_eq = diff(eq, x)
+>>> roots = solve(d_eq, diff(y, x, 1))
+KeyboardInterrupt
+>>> roots = solve(d_eq, diff(y, x, 1))
+>>> _dydx = roots[0]
+>>> pprints(eq, d_eq, _dydx)
+ 2    2        
+x  + y (x) - 25
+             d       
+2*x + 2*y(x)*--(y(x))
+             dx      
+-x  
+----
+y(x)
+>>> dydx = _dydx.subs(Function('y')(x), z)
+>>> slope = dydx.subs([(x, 3), (z, -4)])
+>>> print 'The slope is ', slope
+SyntaxError: Missing parentheses in call to 'print'
+>>> (print) 'The slope is ', slope
+SyntaxError: invalid syntax
+>>> print slope
+SyntaxError: Missing parentheses in call to 'print'
+>>> (print)slope
+SyntaxError: invalid syntax
+>>> from sympy.core.function import AppliedUndef
+>>> _y = iter(dydx.atoms(AppliedUndef)).next()
+Traceback (most recent call last):
+  File "<pyshell#21>", line 1, in <module>
+    _y = iter(dydx.atoms(AppliedUndef)).next()
+AttributeError: 'set_iterator' object has no attribute 'next'
+>>> dydx = _dydx.subs(Function('y')(x), z)
+>>> slope = dydx.subs([(x, 3), (z, -4)])
+>>> print 'The slope is ', slope
+SyntaxError: Missing parentheses in call to 'print'
+>>> slope
+3/4
+>>> print ('The Slope is', slope)
+The Slope is 3/4
+>>> 
