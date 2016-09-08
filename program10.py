@@ -1,3 +1,3 @@
->>> import sympy
->>> diff(x**4 + 6*x, x, x)
-12*x**2
+from sympy import *
+
+diff(x ** 4 + 6 * x, x, x)
